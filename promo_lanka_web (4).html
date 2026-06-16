@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Lanka - Earn Money & Promote Your Pages</title>
+    <style>
+        :root {
+            --primary: #2563eb; /* Blue */
+            --secondary: #7c3aed; /* Purple */
+            --dark: #0f172a; /* Dark Black/Blue */
+            --light: #f8fafc; /* White/Gray */
+            --text-dark: #1e293b;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text-light);
+            padding-bottom: 60px;
+        }
+
+        /* Header Style */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        /* Container & Navigation */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 15px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background-color: #1e293b;
+            color: white;
+            border: 2px solid var(--secondary);
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.4);
+        }
+
+        /* Forms & Cards Style */
+        .section-panel {
+            background-color: #1e293b;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none;
+        }
+
+        .section-panel.active {
+            display: block;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #a78bfa;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background-color: #0f172a;
+            color: white;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 16px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background-color: #0f172a;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            text-align: center;
+        }
+
+        .stat-card.earning { border-left-color: #10b981; }
+        .stat-card.limit { border-left-color: #ef4444; }
+
+        .stat-card h3 { font-size: 0.9rem; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase;}
+        .stat-card p { font-size: 1.6rem; font-weight: bold;}
+
+        /* Task List */
+        .task-item {
+            background-color: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid #334155;
+        }
+
+        @media(min-width: 600px) {
+            .task-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .task-reward {
+            background-color: #10b981;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .btn-task {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        @media(min-width: 600px) {
+            .btn-task {
+                width: auto;
+            }
+        }
+
+        /* Admin Table */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #0f172a;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+            font-size: 0.95rem;
+        }
+
+        th { background-color: #334155; color: #a78bfa; font-weight: 600; }
+
+        .status-badge {
+            background-color: #ef4444;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .status-badge.ready { background-color: #10b981; }
+
+        .referral-box {
+            background-color: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px dashed var(--secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        @media(min-width: 600px) {
+            .referral-box {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .ref-link-text {
+            color: #a78bfa;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        .btn-copy {
+            background-color: #475569;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>PROMO LANKA</h1>
+        <p>ශ්‍රී ලංකාවේ විශ්වාසවන්තම Social Media Promotion සහ Part-Time Job පද්ධතිය</p>
+    </header>
+
+    <div class="container">
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('register-section')">Register</button>
+            <button class="tab-btn" onclick="switchTab('login-section')">Login</button>
+            <button class="tab-btn" onclick="switchTab('dashboard-section')">Member Dashboard</button>
+            <button class="tab-btn" onclick="switchTab('admin-section')">Admin Panel (Payouts)</button>
+        </div>
+
+        <!-- 1 & 2 & 3. Registration Section -->
+        <div id="register-section" class="section-panel active">
+            <h2>නව සාමාජිකයෙකු ලෙස ලියාපදිංචි වීම</h2>
+            <form id="regForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>සම්පූර්ණ නම (Full Name)</label>
+                    <input type="text" id="regName" placeholder="ඔබේ නම ඇතුළත් කරන්න" required>
+                </div>
+                <div class="form-group">
+                    <label>ජාතික හැඳුනුම්පත් අංකය (ID Number)</label>
+                    <input type="text" id="regID" placeholder="ID අංකය ඇතුළත් කරන්න" required>
+                </div>
+                <div class="form-group">
+                    <label>දුරකථන අංකය (Phone Number)</label>
+                    <input type="tel" id="regPhone" placeholder="07XXXXXXXX" required>
+                </div>
+                <div class="form-group">
+                    <label>ලිපිනය (Address)</label>
+                    <textarea id="regAddress" rows="3" placeholder="ඔබේ ලිපිනය ඇතුළත් කරන්න" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>මුදල් ලබාගන්නා බැංකු විස්තර (Bank Name, Branch, Account Number)</label>
+                    <textarea id="regBank" rows="3" placeholder="උදා: BOC, Gampaha Branch, Acc: 1234567" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>මුදල්පදය (Password)</label>
+                    <input type="password" id="regPassword" placeholder="නව මුදල්පදයක් ඇතුළත් කරන්න" required>
+                </div>
+                <button type="submit" class="btn-submit">ලියාපදිංචි වන්න</button>
+            </form>
+        </div>
+
+        <!-- 9. Login Section -->
+        <div id="login-section" class="section-panel">
+            <h2>සාමාජික ඇතුළුවීම (Login)</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>ජාතික හැඳුනුම්පත් අංකය (ID Number)</label>
+                    <input type="text" id="loginID" placeholder="ඔබේ ID අංකය ඇතුළත් කරන්න" required>
+                </div>
+                <div class="form-group">
+                    <label>මුදල්පදය (Password)</label>
+                    <input type="password" id="loginPassword" placeholder="මුදල්පදය ඇතුළත් කරන්න" required>
+                </div>
+                <button type="submit" class="btn-submit">ඇතුළු වන්න</button>
+            </form>
+        </div>
+
+        <!-- 4 & 5. Member Dashboard Section -->
+        <div id="dashboard-section" class="section-panel">
+            <h2>සාමාජික පාලක පුවරුව (Member Dashboard)</h2>
+            <p style="margin-bottom: 20px; color: #67e8f9; font-weight: 600;">සාදරයෙන් පිළිගනිමු, <span id="dashMemberName">User</span>! (ID: <span id="dashRegNo">PL-0000</span>)</p>
+            
+            <div class="dashboard-grid">
+                <div class="stat-card earning">
+                    <h3>මුළු ඉපැයීම (Total Earnings)</h3>
+                    <p>රු. <span id="txtEarnings">0.00</span></p>
+                </div>
+                <div class="stat-card">
+                    <h3>රෙෆරල් ඉපැයීම් (Referral Income)</h3>
+                    <p>රු. <span id="txtRefEarnings">0.00</span></p>
+                </div>
+                <div class="stat-card limit">
+                    <h3>අවම විදහා ගැනීමේ සීමාව</h3>
+                    <p>රු. 2500.00</p>
+                </div>
+            </div>
+
+            <!-- Referral Link Box -->
+            <div class="form-group">
+                <label>ඔබේ රෙෆරල් ලින්ක් එක (Your Referral Link)</label>
+                <div class="referral-box">
+                    <span id="refLinkText" class="ref-link-text">https://promolanka.com/join?ref=PL-1000</span>
+                    <button class="btn-copy" onclick="copyRefLink()">Copy Link</button>
+                </div>
+                <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 8px; line-height: 1.4;">*ඔබේ ලින්ක් එකෙන් කස්ටමර් කෙනෙක් සම්බන්ධ වුවහොත් රු. 500ක් සහ මෙම්බර් කෙනෙක් සම්බන්ධ වුවහොත් රු. 10ක් ඔබට එකතු වේ.</p>
+            </div>
+
+            <h3 style="margin: 25px 0 15px 0; color: #a78bfa; border-bottom: 1px solid #334155; padding-bottom: 5px;">ඔබට කිරීමට ඇති වැඩ (Available Tasks)</h3>
+            <div id="tasks-container">
+                <!-- Tasks generated via JS -->
+            </div>
+        </div>
+
+        <!-- 6. Admin Section (Filter View) -->
+        <div id="admin-section" class="section-panel">
+            <h2>ප්‍රධාන පාලක පුවරුව (Admin Payout Filter)</h2>
+            <p style="color: #94a3b8; margin-bottom: 20px; line-height: 1.4;">මෙහි පෙන්වනු ලබන්නේ රු. 2500 සීමාව පසුකර මාසික ගෙවීම් සඳහා සුදුසුකම් ලැබූ අය පමණි (මාසේ අගදී ගෙවීම් කිරීමට පහසු වේ).</p>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reg No</th>
+                            <th>නම</th>
+                            <th>දුරකථන අංකය</th>
+                            <th>බැංකු විස්තර</th>
+                            <th>මුළු මුදල</th>
+                            <th>තත්ත්වය</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- Filtered data will appear here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switch Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.section-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            const btnIndex = ['register-section', 'login-section', 'dashboard-section', 'admin-section'].indexOf(tabId);
+            document.querySelectorAll('.tab-btn')[btnIndex].classList.add('active');
+        }
+
+        // State Management for Local Storage / Simulation
+        let currentEarnings = parseFloat(localStorage.getItem('pl_earnings')) || 0;
+        let refEarnings = parseFloat(localStorage.getItem('pl_ref_earnings')) || 0;
+        let memberName = localStorage.getItem('pl_name') || 'සාමාජිකයා';
+        let memberPhone = localStorage.getItem('pl_phone') || '';
+        let memberBank = localStorage.getItem('pl_bank') || '';
+        let generatedRegNo = localStorage.getItem('pl_regno') || "PL-" + Math.floor(1000 + Math.random() * 9000);
+
+        // Task Rates
+        const tasks = [
+            { id: 1, type: "Page Follow", reward: 5, desc: "Facebook/Instagram Page එකක් Follow කිරීම" },
+            { id: 2, type: "Full Video View", reward: 10, desc: "YouTube හෝ TikTok වීඩියෝවක් සම්පූර්ණයෙන් බැලීම" },
+            { id: 3, type: "Comment Task", reward: 5, desc: "අදාළ පෝස්ට් එකට සාධනීය කමෙන්ට් එකක් දැමීම" },
+            { id: 4, type: "Share Task", reward: 2, desc: "පෝස්ට් එක ඔබේ සමාජ මාධ්‍ය ගිණුමක Share කිරීම" }
+        ];
+
+        // Init values on load
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('dashMemberName').innerText = memberName;
+            document.getElementById('dashRegNo').innerText = generatedRegNo;
+            document.getElementById('refLinkText').innerText = `https://promolanka.com/join?ref=${generatedRegNo}`;
+            document.getElementById('txtEarnings').innerText = currentEarnings.toFixed(2);
+            document.getElementById('txtRefEarnings').innerText = refEarnings.toFixed(2);
+            loadTasks();
+            updateAdminTable();
+        });
+
+        // Handle Register
+        function handleRegister(event) {
+            event.preventDefault();
+            memberName = document.getElementById('regName').value;
+            memberPhone = document.getElementById('regPhone').value;
+            memberBank = document.getElementById('regBank').value;
+            generatedRegNo = "PL-" + Math.floor(1000 + Math.random() * 9000);
+            
+            localStorage.setItem('pl_name', memberName);
+            localStorage.setItem('pl_phone', memberPhone);
+            localStorage.setItem('pl_bank', memberBank);
+            localStorage.setItem('pl_regno', generatedRegNo);
+
+            alert(`ලියාපදිංචිය සාර්ථකයි!\nඔබේ ලියාපදිංචි අංකය (Reg No): ${generatedRegNo}\nකරුණාකර මෙම අංකයෙන් ලොග් වන්න.`);
+            
+            document.getElementById('dashMemberName').innerText = memberName;
+            document.getElementById('dashRegNo').innerText = generatedRegNo;
+            document.getElementById('refLinkText').innerText = `https://promolanka.com/join?ref=${generatedRegNo}`;
+            
+            switchTab('login-section');
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
+            switchTab('dashboard-section');
+            loadTasks();
+            updateAdminTable();
+        }
+
+        // Load Tasks to Dashboard
+        function loadTasks() {
+            const container = document.getElementById('tasks-container');
+            container.innerHTML = "";
+            tasks.forEach(task => {
+                container.innerHTML += `
+                    <div class="task-item">
+                        <div>
+                            <strong style="color: #67e8f9;">● ${task.type}</strong>
+                            <p style="color:#cbd5e1; font-size:0.9rem; margin-top:4px;">${task.desc}</p>
+                        </div>
+                        <div style="display:flex; align-items:center; justify-content: space-between; gap:15px;">
+                            <span class="task-reward">රු. ${task.reward}</span>
+                            <button class="btn-task" onclick="completeTask(${task.reward}, this)">Complete</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Complete Task
+        function completeTask(amount, button) {
+            currentEarnings += amount;
+            localStorage.setItem('pl_earnings', currentEarnings);
+            document.getElementById('txtEarnings').innerText = currentEarnings.toFixed(2);
+            button.innerText = "Done ✓";
+            button.style.backgroundColor = "#10b981";
+            button.disabled = true;
+            updateAdminTable();
+        }
+
+        // Copy Referral Link
+        function copyRefLink() {
+            const linkText = document.getElementById('refLinkText').innerText;
+            navigator.clipboard.writeText(linkText).then(() => {
+                alert("Referral Link එක Copy කරගන්නා ලදී!");
+            });
+        }
+
+        // Update Admin Filter View (Rule 5 & 6)
+        function updateAdminTable() {
+            const tbody = document.getElementById('adminTableBody');
+            tbody.innerHTML = "";
+            
+            let total = currentEarnings + refEarnings;
+            
+            // Simulation Check: If earnings >= 2500, show in admin filter
+            if (total >= 2500) {
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="font-weight:bold; color:#67e8f9;">${generatedRegNo}</td>
+                        <td>${memberName}</td>
+                        <td>${memberPhone || '07XXXXXXXX'}</td>
+                        <td style="font-size:0.85rem; max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${memberBank || 'No Details'}</td>
+                        <td style="color:#10b981; font-weight:bold;">රු. ${total.toFixed(2)}</td>
+                        <td><span class="status-badge ready">Ready (Month-End)</span></td>
+                    </tr>
+                `;
+            } else {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding: 20px;">රු. 2500 සීමාව පසුකල සාමාජිකයින් කිසිවෙකු නොමැත.<br><span style="font-size:0.85rem; color:#f43f5e;">(වත්මන් සාමාජික ශේෂය: රු. ${total.toFixed(2)} - පරීක්ෂා කිරීම සඳහා වැඩ සියල්ල සම්පූර්ණ කරන්න හෝ මුදල වැඩි කරන්න)</span></td></tr>`;
+            }
+        }
+    </script>
+</body>
+</html>
